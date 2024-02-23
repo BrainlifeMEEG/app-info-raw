@@ -21,7 +21,7 @@ with open(__location__+'/config.json') as config_json:
 fname = config['raw']
 
 # Read the raw data and info
-raw = mne.read_raw_fif(fname)
+raw = mne.io.read_raw_fif(fname)
 info = raw.info
 
 #Save the info into a info.txt file
