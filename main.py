@@ -30,10 +30,9 @@ with open(os.path.join('out_dir','info.txt'), 'w') as f:
 
 # create a product.json file to show the output
 dict_json_product = {'brainlife': []}
-# add the content of info to the product.json
-# turn info into a text string
+
 info = str(info)
 dict_json_product['brainlife'].append({'type': 'message', 'msg': info})
-# Save the dict_json_product in a json file
+
 with open('product.json', 'w') as outfile:
     json.dump(dict_json_product, outfile)
