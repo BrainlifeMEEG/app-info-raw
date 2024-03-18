@@ -32,7 +32,7 @@ with open(os.path.join('out_dir','info.txt'), 'w') as f:
 dict_json_product = {'brainlife': []}
 
 info = str(info)
-dict_json_product['brainlife'].append({'type': 'message', 'msg': info})
+dict_json_product['brainlife'].append({'type': 'info', 'msg': info})
 
 with open('product.json', 'w') as outfile:
     json.dump(dict_json_product, outfile)
