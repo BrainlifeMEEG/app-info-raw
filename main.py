@@ -76,11 +76,15 @@ positions = raw._get_channel_positions()
 if positions is not None and np.any(~np.isnan(positions)):
     msg = 'Full list of channels: ' + ', '.join(raw.ch_names)
     add_info_to_product(product_items, msg)
-    # Try to plot the montage
+    
+    # Try to plot the montage using raw.plot_sensors()
     try:
-        # Create montage plot (2D topographic view)
-        fig = plt.figure(figsize=(10, 8))
-        mne.viz.plot_montage(raw.get_montage(), kind='topomap', show=False)
+        fig, ax = plt.subplots(figsize=(10, 10))
+        plt.sca(ax)
+        plt.title('Electrode Montage (2D)')
+        raw.plot_sensors(show_names=True, axes=ax)
+        plt.tight_layout()
+        
         montage_img = save_figure_with_base64(fig, 
                                               os.path.join('out_figs', 'montage_2d.png'))
         add_image_to_product(product_items, 'Channel Montage (2D)', 
