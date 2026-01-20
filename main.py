@@ -79,14 +79,15 @@ if positions is not None and np.any(~np.isnan(positions)):
     
     # Try to plot the montage using raw.plot_sensors()
     try:
-        fig, ax = plt.subplots(figsize=(10, 10))
+        fig, ax = plt.subplots(figsize=(8, 8))
         plt.sca(ax)
         plt.title('Electrode Montage (2D)')
         raw.plot_sensors(show_names=True, axes=ax)
         plt.tight_layout()
         
         montage_img = save_figure_with_base64(fig, 
-                                              os.path.join('out_figs', 'montage_2d.png'))
+                                              os.path.join('out_figs', 'montage_2d.png'),
+                                              dpi_file=150, dpi_base64=80)
         add_image_to_product(product_items, 'Channel Montage (2D)', 
                            base64_data=montage_img)
     except Exception as e:
@@ -94,7 +95,7 @@ if positions is not None and np.any(~np.isnan(positions)):
     
     # Try to plot 3D electrode positions
     try:
-        fig = plt.figure(figsize=(12, 10))
+        fig = plt.figure(figsize=(10, 8))
         ax = fig.add_subplot(111, projection='3d')
         ax.scatter(positions[:, 0], positions[:, 1], positions[:, 2], s=50, alpha=0.6)
         
@@ -109,7 +110,8 @@ if positions is not None and np.any(~np.isnan(positions)):
         fig.tight_layout()
         
         electrode_img = save_figure_with_base64(fig, 
-                                                os.path.join('out_figs', 'electrodes_3d.png'))
+                                                os.path.join('out_figs', 'electrodes_3d.png'),
+                                                dpi_file=150, dpi_base64=80)
         add_image_to_product(product_items, 'Electrode Positions (3D)', 
                            base64_data=electrode_img)
     except Exception as e:
