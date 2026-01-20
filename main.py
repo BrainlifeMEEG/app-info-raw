@@ -34,14 +34,17 @@ from brainlife_utils import (
     ensure_output_dirs,
     create_product_json,
     add_info_to_product,
-    add_raw_info_to_product
+    add_raw_info_to_product,
+    add_image_to_product,
+    save_figure_with_base64
 )
+import matplotlib.pyplot as plt
 
 # Set up matplotlib for headless execution
 setup_matplotlib_backend()
 
 # Ensure output directories exist
-ensure_output_dirs('out_dir')
+ensure_output_dirs('out_dir', 'out_figs')
 
 # Load configuration
 config = load_config()
@@ -64,13 +67,43 @@ product_items = []
 # Add structured raw info messages
 add_raw_info_to_product(product_items, raw)
 
-# Add channel positions information
+# Add channel positions visualization if available
 positions = raw._get_channel_positions()
 if positions is not None and np.any(~np.isnan(positions)):
-    channel_positions_msg = "Channel positions:\n" + "\n".join(
-        [f"{ch_name}: {pos.tolist()}" for ch_name, pos in zip(raw.ch_names, positions)]
-    )
-    add_info_to_product(product_items, channel_positions_msg)
+    # Try to plot the montage
+    try:
+        # Create montage plot (2D topographic view)
+        fig = plt.figure(figsize=(10, 8))
+        mne.viz.plot_montage(raw.get_montage(), kind='topomap', show=False)
+        montage_img = save_figure_with_base64(fig, 
+                                              os.path.join('out_figs', 'montage_2d.png'))
+        add_image_to_product(product_items, 'Channel Montage (2D)', 
+                           base64_data=montage_img)
+    except Exception as e:
+        add_info_to_product(product_items, f"Could not plot montage: {str(e)}", 'warning')
+    
+    # Try to plot 3D electrode positions
+    try:
+        fig = plt.figure(figsize=(12, 10))
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(positions[:, 0], positions[:, 1], positions[:, 2], s=50, alpha=0.6)
+        
+        # Add channel names to points
+        for i, (pos, ch_name) in enumerate(zip(positions, raw.ch_names)):
+            ax.text(pos[0], pos[1], pos[2], ch_name, fontsize=8, alpha=0.7)
+        
+        ax.set_xlabel('X (m)')
+        ax.set_ylabel('Y (m)')
+        ax.set_zlabel('Z (m)')
+        ax.set_title('3D Electrode Positions')
+        fig.tight_layout()
+        
+        electrode_img = save_figure_with_base64(fig, 
+                                                os.path.join('out_figs', 'electrodes_3d.png'))
+        add_image_to_product(product_items, 'Electrode Positions (3D)', 
+                           base64_data=electrode_img)
+    except Exception as e:
+        add_info_to_product(product_items, f"Could not plot 3D positions: {str(e)}", 'warning')
 else:
     msg = 'Full list of channels (no positions available): ' + ', '.join(raw.ch_names)
     add_info_to_product(product_items, msg)
