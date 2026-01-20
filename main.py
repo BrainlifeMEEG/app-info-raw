@@ -70,6 +70,8 @@ add_raw_info_to_product(product_items, raw)
 # Add channel positions visualization if available
 positions = raw._get_channel_positions()
 if positions is not None and np.any(~np.isnan(positions)):
+    msg = 'Full list of channels: ' + ', '.join(raw.ch_names)
+    add_info_to_product(product_items, msg)
     # Try to plot the montage
     try:
         # Create montage plot (2D topographic view)
