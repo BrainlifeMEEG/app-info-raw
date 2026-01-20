@@ -36,7 +36,8 @@ from brainlife_utils import (
     add_info_to_product,
     add_raw_info_to_product,
     add_image_to_product,
-    save_figure_with_base64
+    save_figure_with_base64,
+    plot_digitized_head_points_3d
 )
 import matplotlib.pyplot as plt
 
@@ -66,6 +67,9 @@ product_items = []
 
 # Add structured raw info messages
 add_raw_info_to_product(product_items, raw)
+
+# Add digitized head points visualization if available
+plot_digitized_head_points_3d(raw, items_list=product_items, output_dir='out_figs')
 
 # Add channel positions visualization if available
 positions = raw._get_channel_positions()
