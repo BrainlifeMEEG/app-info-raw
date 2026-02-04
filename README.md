@@ -14,7 +14,8 @@ This Brainlife App reads the .info attribute of a MNE/Raw instance and outputs i
   * a .txt file with the .info attribute of the MNE/Raw instance.
 
 ## Authors
-- Kamilya Salibayeva (ksalibay@iu.edu)
+- [Kamilya Salibayeva](https://github.com/KSalibay) (Indiana University)
+- [Maximilien Chaumon](https://github.com/dnacombo), Paris Brain Institute
 
 ### Funding Acknowledgement
 brainlife.io is publicly funded and for the sustainability of the project it is helpful to Acknowledge the use of the platform. We kindly ask that you acknowledge the funding below in your publications and code reusing this code.

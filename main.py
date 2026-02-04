@@ -12,12 +12,13 @@ Output:
     - product.json: Metadata for Brainlife.io visualization
 """
 
-# Copyright (c) 2020 brainlife.io
+# Copyright (c) 2026 brainlife.io
 #
 # This app displays MNE raw data information.
 #
-# Author: Kami Salibayeva
-# Indiana University
+# Authors:
+# - Kamilya Salibayeva (https://github.com/KSalibay)
+# - Maximilien Chaumon (https://github.com/dnacombo)
 
 import sys
 import os
