@@ -40,3 +40,7 @@ Frontiers in Neuroscience, 7(267):1–13, 2013. https://doi.org/10.3389/fnins.20
   --
 
 #### MIT Copyright (c) 2021 brainlife.io The University of Texas at Austin and Indiana University
+
+## Citation
+
+Hayashi, S., Caron, B.A., Heinsfeld, A.S. et al. brainlife.io: a decentralized and open-source cloud platform to support neuroscience research. Nat Methods 21, 809–813 (2024). https://doi.org/10.1038/s41592-024-02237-2
