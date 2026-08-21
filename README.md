@@ -39,7 +39,9 @@ Frontiers in Neuroscience, 7(267):1–13, 2013. https://doi.org/10.3389/fnins.20
       
   --
 
-#### MIT Copyright (c) 2021 brainlife.io The University of Texas at Austin and Indiana University
+Copyright (c) 2026 MEEG Brainlife team
+
+This project is licensed under the AGPL-3.0 License - see [license.txt](license.txt) for details.
 
 ## Citation
 
